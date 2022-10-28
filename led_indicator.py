@@ -48,7 +48,8 @@ class LedIndicator:
             self.led_off(color)
             sleep(off_time)
 
-    def with_led_do(self, color, task):
+    # on_time and off_time for compatibility, not used
+    def with_led_do(self, color, task, on_time=0, off_time=0):
         self.led_on(color)
         return_value = task()
         self.led_off(color)

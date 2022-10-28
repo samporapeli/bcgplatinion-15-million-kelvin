@@ -22,7 +22,7 @@ while True:
             'datacenter_id': config['datacenter_id'],
         })
         li.leds_off()
-        work_request = li.with_blinking_do('yellow', work_request_fun, 0.05, 0.05)
+        work_request = li.with_led_do('green', work_request_fun, 0.05, 0.05)
         li.led_on('green')
         work_task = work_request.json()['shell_command']
         if work_task:
@@ -33,13 +33,13 @@ while True:
                 out, err = process.communicate()
                 errcode = process.returncode
                 return out, err, errcode
-            out, err, errcode = li.with_blinking_do('red', run_work_task)
+            out, err, errcode = li.with_led_do('red', run_work_task)
             work_response_fun = lambda: requests.post(f'{config["endpoint"]}/request_work', json={
                 'datacenter_id': config['datacenter_id'],
                 'work_response': out,
                 'exit_status': errcode,
             })
-            li.with_blinking_do('yellow', work_response_fun, 0.05, 0.05)
+            li.with_led_do('green', work_response_fun, 0.05, 0.05)
             li.leds_off()
             li.led_on('green')
         else:
