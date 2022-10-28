@@ -42,7 +42,6 @@ while True:
             li.with_blinking_do('yellow', work_response_fun, 0.05, 0.05)
             li.leds_off()
             li.led_on('green')
-            sleep(1)
         else:
             sleep(1)
     except requests.exceptions.ConnectionError:
