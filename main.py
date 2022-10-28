@@ -11,7 +11,7 @@ li = LedIndicator()
 config = {
 #        'endpoint': 'http://ec2-3-68-221-30.eu-central-1.compute.amazonaws.com:3333/api/v1',
     'endpoint': 'http://sampo.website:3333/api/v1',
-    'rpi_id': 2,
+    'datacenter_id': 'DE',
 }
 
 while True:
@@ -19,7 +19,7 @@ while True:
         li.leds_off()
         li.led_on('green')
         work_request_fun = lambda: requests.post(f'{config["endpoint"]}/request_work', json={
-            'rpi_id': config['rpi_id'],
+            'datacenter_id': config['datacenter_id'],
         })
         li.leds_off()
         work_request = li.with_blinking_do('yellow', work_request_fun, 0.05, 0.05)
@@ -35,7 +35,7 @@ while True:
                 return out, err, errcode
             out, err, errcode = li.with_blinking_do('red', run_work_task)
             work_response_fun = lambda: requests.post(f'{config["endpoint"]}/request_work', json={
-                'rpi_id': config['rpi_id'],
+                'datacenter_id': config['datacenter_id'],
                 'work_response': out,
                 'exit_status': errcode,
             })
