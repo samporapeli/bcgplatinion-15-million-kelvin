@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = Number.parseInt(process.env.PORT) || 3333
 
-let preferredDC = 'DE'
+let preferredDC = 'FR'
 
 app.use(express.json())
 
@@ -24,7 +24,7 @@ app.post('/api/v1/request_work', (req, res) => {
   console.log(req.body)
   res.json({
     ...req.body,
-    shell_command: req.body.datacenter_id === preferredDC ? 'python3 -c "print(22**52)" && sleep 5 && false' : ''
+    shell_command: req.body.datacenter_id === preferredDC ? 'python3 -c "print(22**52)" && sleep 1 && false' : ''
   })
 })
 

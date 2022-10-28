@@ -10,7 +10,7 @@ li = LedIndicator()
 
 config = {
     'endpoint': 'http://ec2-3-68-221-30.eu-central-1.compute.amazonaws.com:3333/api/v1',
-    'datacenter_id': 'DE',
+    'datacenter_id': 'FR',
 }
 
 worked_last_poll = False
