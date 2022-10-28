@@ -49,10 +49,11 @@ class LedIndicator:
             sleep(off_time)
 
     # on_time and off_time for compatibility, not used
-    def with_led_do(self, color, task, on_time=0, off_time=0):
+    def with_led_do(self, color, task, on_time=0, off_time=0, **kwargs):
         self.led_on(color)
         return_value = task()
-        self.led_off(color)
+        if kwargs['turn_off'] != False:
+            self.led_off(color)
         return return_value
 
     def with_blinking_do(self, color, task, on_time=BLINK_ON_TIME, off_time=BLINK_OFF_TIME):
