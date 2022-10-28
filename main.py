@@ -11,7 +11,7 @@ li = LedIndicator()
 config = {
 #        'endpoint': 'http://ec2-3-68-221-30.eu-central-1.compute.amazonaws.com:3333/api/v1',
     'endpoint': 'http://sampo.website:3333/api/v1',
-    'rpi_id': 1,
+    'rpi_id': 2,
 }
 
 while True:
@@ -23,9 +23,11 @@ while True:
         })
         li.leds_off()
         work_request = li.with_blinking_do('yellow', work_request_fun, 0.05, 0.05)
+        li.led_on('green')
         work_task = work_request.json()['shell_command']
         if work_task:
             print(f'got work: {work_task}')
+            li.leds_off()
             def run_work_task():
                 process = subprocess.Popen(work_task, shell=True, stdout=subprocess.PIPE)
                 out, err = process.communicate()
