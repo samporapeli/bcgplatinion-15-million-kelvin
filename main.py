@@ -9,8 +9,7 @@ from led_indicator import LedIndicator
 li = LedIndicator()
 
 config = {
-#        'endpoint': 'http://ec2-3-68-221-30.eu-central-1.compute.amazonaws.com:3333/api/v1',
-    'endpoint': 'http://sampo.website:3333/api/v1',
+    'endpoint': 'http://ec2-3-68-221-30.eu-central-1.compute.amazonaws.com:3333/api/v1',
     'datacenter_id': 'DE',
 }
 
