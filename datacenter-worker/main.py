@@ -13,6 +13,7 @@ config = {
     'datacenter_id': 'FR',
 }
 
+SLEEP_TIME = 0.15
 worked_last_poll = False
 
 li.leds_off()
@@ -22,7 +23,7 @@ while True:
             'datacenter_id': config['datacenter_id'],
         })
         col = 'red' if worked_last_poll else 'green'
-        work_request = li.with_blinking_do(col, work_request_fun, 0.5, 0.1)
+        work_request = li.with_led_do(col, work_request_fun, turn_off=True)
         li.led_on(col)
         work_task = work_request.json()['shell_command']
         if work_task:
@@ -44,8 +45,9 @@ while True:
             work_response_fun()
         else:
             li.led_off('red')
+            li.led_on('green')
             worked_last_poll = False
-            sleep(1)
+            sleep(SLEEP_TIME)
     except requests.exceptions.ConnectionError:
         print('Connection error')
         sleep(1)
